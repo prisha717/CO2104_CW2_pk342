@@ -183,13 +183,28 @@ function displayWishList() {
     wishlistContainer.innerHTML = "<p>No items in your Wish List yet!</p>";
   } else {
     wishlistContainer.innerHTML = "";
-    wishlist.forEach(item => {
+    wishlist.forEach((item, index) => {
       const div = document.createElement('div');
-      div.className = "wishlist-item";
-      div.innerText = item;
+      div.className = "wishlist-item d-flex justify-content-between align-items-center";
+      div.innerHTML = `
+        <span>${item}</span>
+        <button class="btn btn-danger btn-sm" onclick="deleteFromWishlist(${index})">Delete</button>
+      `;
       wishlistContainer.appendChild(div);
     });
   }
+}
+
+document.addEventListener('DOMContentLoaded', displayWishList);
+
+function deleteFromWishlist(index) {
+  const user = sessionStorage.getItem('currentUser');
+  let wishlist = JSON.parse(sessionStorage.getItem(user + '_wishlist')) || [];
+
+  wishlist.splice(index, 1); // Remove the item
+  sessionStorage.setItem(user + '_wishlist', JSON.stringify(wishlist)); // Save updated list
+
+  displayWishList(); // Re-render
 }
 
 
