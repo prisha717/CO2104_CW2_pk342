@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Discover London - Reviews</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background-color: #f9fbfd;">
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #023e8a;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">Discover London</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+        <li class="nav-item"><a class="nav-link" href="search.html">Search</a></li>
+        <li class="nav-item"><a class="nav-link" href="calendar.html">Calendar</a></li>
+        <li class="nav-item"><a class="nav-link active" href="review.html">Reviews</a></li>
+        <li class="nav-item"><a class="nav-link" href="wishlist.html">Wish List</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html">Homepage</a></li>
+        <button onclick="logout()" class="btn btn-danger">Logout</button>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container my-5">
+  <div id="homeView">
+    <div class="text-center mb-4">
+      <p class="mt-2">HELP BUILD TRAVELLER CONFIDENCE</p>
+    </div>
+
+    <div class="row" id="attractionsContainer">
+      <div class="col-md-6">
+        <div class="card p-3 mb-3">
+          <h5>London Eye</h5>
+          <img src="images/london-eye.jpg" alt="London Eye" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px;">
+          <p>★★★★★</p>
+          <button class="btn btn-info btn-sm" onclick="showReviewDetail('London Eye')">1 REVIEWS</button>
+          <button class="btn btn-success btn-sm" onclick="showAddReview('London Eye')">ADD REVIEW</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-3 mb-3">
+          <h5>Tower of London</h5>
+          <img src="images/tower-of-london.jpg" alt="Tower of London" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px;">
+          <p>★★★★★</p>
+          <button class="btn btn-info btn-sm" onclick="showReviewDetail('Tower of London')">2 REVIEWS</button>
+          <button class="btn btn-success btn-sm" onclick="showAddReview('Tower of London')">ADD REVIEW</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-3 mb-3">
+          <h5>Hyde Park</h5>
+          <img src="images/hyde-park.jpg" alt="Hyde Park" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px;">
+          <p>★★★★</p>
+          <button class="btn btn-info btn-sm" onclick="showReviewDetail('Hyde Park')">2 REVIEWS</button>
+          <button class="btn btn-success btn-sm" onclick="showAddReview('Hyde Park')">ADD REVIEW</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-3 mb-3">
+          <h5>Wembley Stadium</h5>
+          <img src="images/wembley-stadium.jpg" alt="Wembley Stadium style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px;">
+          <p>★★★★★</p>
+          <button class="btn btn-info btn-sm" onclick="showReviewDetail('Wembley Stadium')">5 REVIEWS</button>
+          <button class="btn btn-success btn-sm" onclick="showAddReview('Wembley Stadium')">ADD REVIEW</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-3 mb-3">
+          <h5>Dishoom</h5>
+          <img src="images/dishoom.jpg" alt="Dishoom" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px;">
+          <p>★★★★★</p>
+          <button class="btn btn-info btn-sm" onclick="showReviewDetail('Dishoom')">6 REVIEWS</button>
+          <button class="btn btn-success btn-sm" onclick="showAddReview('Dishoom')">ADD REVIEW</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-3 mb-3">
+          <h5>Camden Market</h5>
+          <img src="images/camden-market.jpg" alt="Camden Market" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px;">
+          <p>★★★★</p>
+          <button class="btn btn-info btn-sm" onclick="showReviewDetail('Camden Market')">3 REVIEWS</button>
+          <button class="btn btn-success btn-sm" onclick="showAddReview('Camden Market')">ADD REVIEW</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-3 mb-3">
+          <h5>Natural History Museum</h5>
+          <img src="images/natural-history-museum.jpg" alt="Natural History Museum" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px;">
+          <p>★★★★★</p>
+          <button class="btn btn-info btn-sm" onclick="showReviewDetail('Natural History Museum')">4 REVIEWS</button>
+          <button class="btn btn-success btn-sm" onclick="showAddReview('Natural History Museum')">ADD REVIEW</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-3 mb-3">
+          <h5>Stamford Bridge Stadium</h5>
+          <img src="images/stamford-bridge-stadium.jpg" alt="Stamford Bridge Stadium" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px;">
+          <p>★★★★★</p>
+          <button class="btn btn-info btn-sm" onclick="showReviewDetail('Stamford Bridge Stadium')">3 REVIEWS</button>
+          <button class="btn btn-success btn-sm" onclick="showAddReview('Stamford Bridge Stadium')">ADD REVIEW</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-3 mb-3">
+          <h5>Borough Market</h5>
+          <img src="images/borough-market.jpg" alt="Borough Market" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px;">
+          <p>★★★★★</p>
+          <button class="btn btn-info btn-sm" onclick="showReviewDetail('Borough Market')">3 REVIEWS</button>
+          <button class="btn btn-success btn-sm" onclick="showAddReview('Borough Market')">ADD REVIEW</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-3 mb-3">
+          <h5>The Shard</h5>
+          <img src="images/the-shard.jpg" alt="The Shard" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px;">
+          <p>★★★★★</p>
+          <button class="btn btn-info btn-sm" onclick="showReviewDetail('The Shard')">3 REVIEWS</button>
+          <button class="btn btn-success btn-sm" onclick="showAddReview('The Shard')">ADD REVIEW</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-3 mb-3">
+          <h5>Lee Valley White Water Centre</h5>
+          <img src="images/lee-valley-white-water-centre.jpg" alt="Lee Valley White Water Centre" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px;">
+          <p>★★★★★</p>
+          <button class="btn btn-info btn-sm" onclick="showReviewDetail('Lee Valley White Water Centre')">3 REVIEWS</button>
+          <button class="btn btn-success btn-sm" onclick="showAddReview('Lee Valley White Water Centre')">ADD REVIEW</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-3 mb-3">
+          <h5>Brick Lane</h5>
+          <img src="images/brick-lane.jpg" alt="Brick Lane" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px;">
+          <p>★★★★★</p>
+          <button class="btn btn-info btn-sm" onclick="showReviewDetail('Brick Lane')">3 REVIEWS</button>
+          <button class="btn btn-success btn-sm" onclick="showAddReview('Brick Lane')">ADD REVIEW</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card p-3 mb-3">
+          <h5>Wimbledon Tennis Club</h5>
+          <img src="images/wimbledon-tennis-club.jpg" alt="Wimbledon Tennis Club" style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px;">
+          <p>★★★★★</p>
+          <button class="btn btn-info btn-sm" onclick="showReviewDetail('Wimbledon Tennis Club')">4 REVIEWS</button>
+          <button class="btn btn-success btn-sm" onclick="showAddReview('Wimbledon Tennis Club')">ADD REVIEW</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-secondary" onclick="prevAttractions()">BACK</button>
+      <button class="btn btn-primary" onclick="nextAttractions()">NEXT</button>
+    </div>    
+  </div>
+
+  <div id="detailView" style="display: none;">
+    <button class="btn btn-secondary mb-3" onclick="goBack()">BACK</button>
+    <h4 id="detailAttraction"></h4>
+    <div id="reviewsContainer"></div>
+  </div>
+
+  <div id="addReviewView" style="display: none;">
+    <button class="btn btn-secondary mb-3" onclick="goBack()">BACK</button>
+    <h4 id="addReviewAttraction"></h4>
+    <form id="addReviewForm">
+      <div class="mb-3">
+        <label for="rating" class="form-label">RATING</label>
+        <select class="form-select" id="rating" required>
+          <option value="5">★★★★★</option>
+          <option value="4">★★★★</option>
+          <option value="3">★★★</option>
+          <option value="2">★★</option>
+          <option value="1">★</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="reviewContent" class="form-label">REVIEW</label>
+        <textarea class="form-control" id="reviewContent" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-success">UPLOAD</button>
+    </form>
+    <p id="uploadConfirmation" class="mt-3 text-success" style="display: none;">REVIEW HAS BEEN UPLOADED</p>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
