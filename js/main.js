@@ -156,6 +156,10 @@ function addToWishList(attractionName) {
 
   let wishlist = JSON.parse(sessionStorage.getItem(user + '_wishlist')) || [];
 
+  if (wishlist.includes(attractionName)) {
+    showAlert("This attraction is already in your Wish List.");
+    return;
+  }
 
   if (Math.random() < 0.95) {
     wishlist.push(attractionName);
