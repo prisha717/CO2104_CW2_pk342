@@ -1,4 +1,3 @@
-// ------ ATTRACTIONS DATA ------
 const attractions = [
   {
     name: "London Eye",
@@ -94,7 +93,6 @@ const attractions = [
 ];
 
 
-// ------ SEARCH + FILTER FUNCTION ------
 function searchAttractions() {
   const input = document.getElementById('searchInput').value.toLowerCase();
   const sportChecked = document.getElementById('sport').checked;
@@ -145,14 +143,12 @@ function searchAttractions() {
 }
 
 
-// ------ WISH LIST (PER USER) ------
 function addToWishList(attractionName) {
   const user = sessionStorage.getItem('currentUser');
   if (!user) {
     showAlert("You must log in first!");
     return;
   }
-
 
   let wishlist = JSON.parse(sessionStorage.getItem(user + '_wishlist')) || [];
 
@@ -170,7 +166,6 @@ function addToWishList(attractionName) {
   }
 }
 
-
 function displayWishList() {
   const user = sessionStorage.getItem('currentUser');
   if (!user) {
@@ -178,10 +173,8 @@ function displayWishList() {
     return;
   }
 
-
   const wishlist = JSON.parse(sessionStorage.getItem(user + '_wishlist')) || [];
   const wishlistContainer = document.getElementById('wishlistItems');
-
 
   if (wishlist.length === 0) {
     wishlistContainer.innerHTML = "<p>No items in your Wish List yet!</p>";
@@ -212,24 +205,14 @@ function deleteFromWishlist(index) {
 }
 
 
-// ------ EVENT HANDLING FOR CALENDAR PAGE ------
-
-
 document.addEventListener('DOMContentLoaded', function () {
-  // Initialize calendar if on calendar page
   if (document.getElementById('calendar')) {
     const calendarEl = document.getElementById('calendar');
     const calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth'
     });
     calendar.render();
-
-
-    // Load existing events for current user
     displayUserEvents();
-
-
-    // Event form submission
     document.getElementById('eventForm').addEventListener('submit', function (e) {
       e.preventDefault();
       addEvent();
@@ -237,27 +220,22 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-
 function addEvent() {
   const user = sessionStorage.getItem('currentUser');
   if (!user) {
     alert("You must log in first!");
     return;
   }
-
-
   const eventName = document.getElementById('eventName').value;
   const eventTime = document.getElementById('eventTime').value;
   const eventDate = document.getElementById('eventDate').value;
   const eventLocation = document.getElementById('eventLocation').value;
   const eventDescription = document.getElementById('eventDescription').value;
-
-
+  
   if (!eventName || !eventTime || !eventDate || !eventLocation) {
     alert("Please fill in all required fields.");
     return;
   }
-
 
   const newEvent = {
     name: eventName,
@@ -267,21 +245,15 @@ function addEvent() {
     description: eventDescription
   };
 
-
   let userEvents = JSON.parse(sessionStorage.getItem(user + '_events')) || [];
   userEvents.push(newEvent);
   sessionStorage.setItem(user + '_events', JSON.stringify(userEvents));
-
-
   document.getElementById('eventForm').reset();
   const modal = bootstrap.Modal.getInstance(document.getElementById('addEventModal'));
   modal.hide();
-
-
   showAlert("Event Added!");
   displayUserEvents();
 }
-
 
 function displayUserEvents() {
   const user = sessionStorage.getItem('currentUser');
@@ -290,12 +262,8 @@ function displayUserEvents() {
     eventList.innerHTML = "<p class='text-center'>Please log in to see your events.</p>";
     return;
   }
-
-
   const userEvents = JSON.parse(sessionStorage.getItem(user + '_events')) || [];
   eventList.innerHTML = "";
-
-
   userEvents.forEach((event, index) => {
     const eventItem = document.createElement('div');
     eventItem.className = 'list-group-item d-flex justify-content-between align-items-center';
@@ -309,13 +277,10 @@ function displayUserEvents() {
     `;
     eventList.appendChild(eventItem);
   });
-
-
   if (userEvents.length === 0) {
     eventList.innerHTML = "<p class='text-center'>No events added yet.</p>";
   }
 }
-
 
 function deleteEvent(index) {
   const user = sessionStorage.getItem('currentUser');
@@ -327,7 +292,6 @@ function deleteEvent(index) {
 }
 
 
-// ------ GENERAL ALERT FUNCTION ------
 function showAlert(message) {
   const alertBox = document.createElement('div');
   alertBox.className = 'alert';
@@ -337,7 +301,6 @@ function showAlert(message) {
     alertBox.remove();
   }, 3000);
 }
-
 
 const hardcodedReviews = {
   "London Eye": [
@@ -410,19 +373,12 @@ const hardcodedReviews = {
   ]
 };
 
-
 let currentAttraction = "";
 let currentIndex = 0;
 const attractionsList = Object.keys(hardcodedReviews);
-
-
-// Update review count buttons on load
 window.addEventListener('DOMContentLoaded', function() {
   renderAttractions();
 });
-
-
-// Render 2 cards at a time
 function renderAttractions() {
   const container = document.getElementById('attractionsContainer');
   container.innerHTML = '';
@@ -447,17 +403,12 @@ function renderAttractions() {
   }
 }
 
-
-
-// Calculate average rating
 function averageRating(attraction) {
   const reviews = hardcodedReviews[attraction];
   const sum = reviews.reduce((acc, r) => acc + r.rating, 0);
   return Math.round(sum / reviews.length);
 }
 
-
-// Go to next 2 cards
 function nextAttractions() {
   currentIndex += 2;
   if (currentIndex >= attractionsList.length) {
@@ -465,7 +416,6 @@ function nextAttractions() {
   }
   renderAttractions();
 }
-
 
 function prevAttractions() {
   currentIndex -= 2;
@@ -475,19 +425,11 @@ function prevAttractions() {
   renderAttractions();
 }
 
-
-
-
-// Show all reviews
 function showReviewDetail(attraction) {
   currentAttraction = attraction;
-
-
   document.getElementById('homeView').style.display = 'none';
   document.getElementById('detailView').style.display = 'block';
   document.getElementById('addReviewView').style.display = 'none';
-
-
   const reviews = hardcodedReviews[attraction] || [];
   const detailContainer = document.getElementById('detailView');
   detailContainer.innerHTML = `
@@ -495,11 +437,8 @@ function showReviewDetail(attraction) {
     <h4>${attraction}</h4>
     <div id="reviewsContainer"></div>
   `;
-
-
   const reviewsContainer = document.createElement('div');
   reviewsContainer.id = 'reviewsContainer';
-
 
   if (reviews.length > 0) {
     reviews.forEach(r => {
@@ -515,26 +454,16 @@ function showReviewDetail(attraction) {
   } else {
     reviewsContainer.innerHTML = '<p>No reviews yet</p>';
   }
-
-
   detailContainer.appendChild(reviewsContainer);
 }
 
-
-// Show add review form
 function showAddReview(attraction) {
   currentAttraction = attraction;
-
-
   document.getElementById('homeView').style.display = 'none';
   document.getElementById('detailView').style.display = 'none';
   document.getElementById('addReviewView').style.display = 'block';
-
-
   document.getElementById('addReviewAttraction').innerText = attraction;
   document.getElementById('uploadConfirmation').style.display = 'none';
-
-
   const form = document.getElementById('addReviewForm');
   form.onsubmit = function (e) {
     e.preventDefault();
@@ -542,60 +471,41 @@ function showAddReview(attraction) {
   };
 }
 
-
-// Add review
 function addReview() {
   const user = sessionStorage.getItem('currentUser') || 'Anonymous';
   const rating = parseInt(document.getElementById('rating').value);
   const text = document.getElementById('reviewContent').value;
-
-
   if (!hardcodedReviews[currentAttraction]) {
     hardcodedReviews[currentAttraction] = [];
   }
-
-
   hardcodedReviews[currentAttraction].push({ user, rating, text });
-
-
   document.getElementById('addReviewForm').reset();
   document.getElementById('uploadConfirmation').style.display = 'block';
-
-
-  renderAttractions(); // Update buttons with new count
+  renderAttractions(); 
 }
 
-
-
-
-// ------ GO BACK TO HOME ------
 function goBack() {
   document.getElementById('homeView').style.display = 'block';
   document.getElementById('detailView').style.display = 'none';
   document.getElementById('addReviewView').style.display = 'none';
 }
 
-
 document.addEventListener('DOMContentLoaded', function () {
   const signupForm = document.getElementById('signup-form');
   const loginForm = document.getElementById('login-form');
 
-  // ------- SIGNUP HANDLER -------
+  
   if (signupForm) {
     signupForm.addEventListener('submit', function (e) {
       e.preventDefault();
-
       const name = document.getElementById('signup-name').value.trim();
       const email = document.getElementById('signup-email').value.trim();
       const password = document.getElementById('signup-password').value.trim();
-
       if (!name || !email || !password) {
         showAlert("Please fill in all fields to sign up.");
         return;
       }
-
       const users = JSON.parse(localStorage.getItem('users') || '{}');
-
       if (users[email]) {
         showAlert("That user already exists. Please log in instead.");
         return;
@@ -609,7 +519,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ------- LOGIN HANDLER -------
   if (loginForm) {
     loginForm.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -636,7 +545,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-// ------- GLOBAL ALERT BOX -------
 function showAlert(message) {
   const alertBox = document.createElement('div');
   alertBox.className = 'alert';
@@ -652,7 +560,6 @@ function showAlert(message) {
   setTimeout(() => alertBox.remove(), 4000);
 }
 
-// ------- TOGGLE FOR LOGIN / SIGNUP VIEW -------
 function showSignup() {
   document.getElementById('login-form').style.display = 'none';
   document.getElementById('signup-form').style.display = 'block';
@@ -665,16 +572,12 @@ function showLogin() {
   document.getElementById('form-title').innerText = 'Login';
 }
 
-
-// Logout Function
 function logout() {
   sessionStorage.removeItem('loggedInUser');
   alert("You have been logged out.");
   window.location.href = 'login.html';
 }
 
-
-// ------ ALERT BOX ------
 function showAlert(message) {
   const alertBox = document.createElement('div');
   alertBox.className = 'alert';
